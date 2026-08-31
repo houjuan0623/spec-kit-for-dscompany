@@ -14,19 +14,20 @@
 ### Typing & Component Contract
 
 - [ ] New components use `<script setup lang="ts">` with typed props/emits
+- [ ] New UI built with naive-ui; no new Element Plus imports (frozen legacy)
 - [ ] Component file names are PascalCase and match the component name
 - [ ] SFCs over 400 lines / TS modules over 300 lines have split tasks listed
 
 ### Internationalization & Copy
 
 - [ ] All new user-visible text goes through vue-i18n; no hard-coded copy
-- [ ] Matching keys added to both Chinese and English packs under `locales/`
+- [ ] Component copy in SFC `<i18n>` blocks with both zh and en; shared copy added to both zh/en keys in `locales/index.ts`
 
 ### State & Data Flow
 
 - [ ] Cross-component shared state lives in Pinia stores; component-local state stays out of global stores
-- [ ] HTTP requests use the unified axios instance; real-time data uses the `mqtt/` wrapper
-- [ ] Async chains have try/catch with ElMessage feedback; 401/403/500 branches follow the convention
+- [ ] HTTP requests use the shared hooks/ axios wrappers (useAxios*); real-time data uses the `mqtt/` wrapper
+- [ ] Async chains have try/catch with naive-ui `useMessage` feedback; 401/403/500 branches follow the convention
 
 ### Testing & Acceptance
 
@@ -36,5 +37,5 @@
 
 ### Commit & Build
 
-- [ ] Commit messages follow Conventional Commits (feat/fix/docs/style/refactor/test/chore + scope)
+- [ ] Commit messages follow Conventional Commits (feat/fix/docs/style/refactor/test/chore; scope optional)
 - [ ] `npm run lint` and `npm run type-check` pass before commit

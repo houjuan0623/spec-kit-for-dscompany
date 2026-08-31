@@ -20,11 +20,11 @@
 
 **Language/Version**: TypeScript (Vue 3.5+ Composition API), Node ≥ 24.10
 
-**Primary Dependencies**: Vite (rolldown-vite), Pinia 3 (+persistedstate), Vue Router 5, Element Plus, TailwindCSS 4, vue-i18n 11, axios, MQTT.js; visualization on demand: ECharts 6 / Konva / Three / AntV G6
+**Primary Dependencies**: Vite (rolldown-vite), Pinia 3 (+persistedstate), Vue Router 5, naive-ui, TailwindCSS 4, vue-i18n 11, axios, MQTT.js; visualization on demand: ECharts 6 / Konva / Three / AntV G6
 
 **Storage**: N/A (frontend; local persistence via pinia-plugin-persistedstate / localforage)
 
-**Testing**: Vitest 4 (unit, colocated `__tests__/`) + Playwright (e2e, `e2e/` directory, chromium locally by default)
+**Testing**: Vitest 4 (unit, colocated `__tests__/`) + Playwright (e2e, `e2e/` directory; config enables chromium/firefox/webkit — run locally with `--project=chromium`)
 
 **Target Platform**: modern browsers (Docker + Nginx deployment, environments via Vite modes)
 
@@ -83,7 +83,7 @@ src/
 ├── assets/            # Static assets
 ├── hooks/             # Composables (stateful reusable logic)
 ├── i18n/              # i18n configuration
-├── locales/           # Chinese & English locale packs (new copy must land in both)
+├── locales/           # Shared copy only (index.ts, zh/en keys); component copy prefers SFC <i18n> blocks
 ├── jsonToForm/        # JSON-to-form components
 ├── layout/            # Layout components
 ├── mqtt/              # MQTT wrapper (real-time data entry point)
@@ -91,10 +91,13 @@ src/
 ├── pages/             # Page components (routed pages)
 ├── router/            # Router configuration (lazy-loaded)
 ├── stores/            # Pinia setup stores
+├── test/              # Legacy scratch samples (not unit tests — do not add here)
 ├── tools/             # Stateless utilities (business logic forbidden)
 ├── view/              # View components
 ├── __tests__/         # Unit tests (may also live in per-source __tests__/ folders)
 ├── App.vue
+├── main.css           # Tailwind entry
+├── main.scss          # Global styles & SCSS variables (Constitution Principle IX)
 └── main.ts
 
 e2e/                   # Playwright e2e tests

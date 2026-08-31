@@ -1,6 +1,6 @@
 # vue-frontend Preset
 
-Stack-standards preset for the AI-Filter frontend: Vue3 + TypeScript + Pinia + Element Plus + Tailwind + ECharts/Konva/Three + MQTT.
+Stack-standards preset for the AI-Filter frontend: Vue3 + TypeScript + Pinia + Naive UI + Tailwind + ECharts/Konva/Three + MQTT.
 
 ## What It Provides
 

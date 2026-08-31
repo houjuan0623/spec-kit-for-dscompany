@@ -25,17 +25,18 @@ template → script setup → style scoped.
 
 Cross-component shared state MUST live in Pinia setup stores (`stores/`), persisted via
 `pinia-plugin-persistedstate` when needed; component-local state MUST NOT enter a global store.
-HTTP requests MUST go through the unified axios instance (with request/response interceptors) —
-creating bare axios instances inside components is forbidden; real-time data MUST go through the
-`mqtt/` wrapper.
-**Check**: bypassing the unified instance or pushing component-local state into a store fails the gate.
+HTTP requests MUST go through the shared axios wrappers in `hooks/` (`useAxios`,
+`useAxiosMonAlert`, `useAxiosDataHub`, `useAuth` — one instance per backend service, each with
+request/response interceptors) — creating bare axios instances inside components is forbidden;
+real-time data MUST go through the `mqtt/` wrapper.
+**Check**: bypassing the shared wrappers or pushing component-local state into a store fails the gate.
 
 ### IV. Async & Error Handling
 
 Async operations MUST use async/await; concurrent requests MUST use `Promise.all` /
-`Promise.allSettled`; async calls MUST be wrapped in try/catch with user feedback through Element
-Plus `ElMessage`; HTTP status semantics are fixed: 401 → redirect to login, 403 → no-permission
-notice, 500 → server-error notice.
+`Promise.allSettled`; async calls MUST be wrapped in try/catch with user feedback through
+naive-ui's `useMessage()` (backed by the `n-message-provider` in App.vue); HTTP status semantics
+are fixed: 401 → redirect to login, 403 → no-permission notice, 500 → server-error notice.
 **Check**: an async chain without error handling, or a home-grown notification channel, fails the gate.
 
 ### V. Design Before Code, Tiered OOD
@@ -54,8 +55,10 @@ gate; forcing full OOD onto a simple-tier feature counts as over-engineering and
 ### VI. Mandatory Internationalization (NON-NEGOTIABLE)
 
 This is an international product. Every user-visible text (UI, errors, notices) MUST go through
-`vue-i18n`, and the Chinese and English locale packs (`locales/`) MUST be updated together;
-hard-coding user-visible copy inside components is forbidden.
+`vue-i18n`. Component-local copy lives in the component's SFC `<i18n>` block (the repository's
+preferred form); copy shared across components or referenced outside components (menus, route
+titles, …) lives in `locales/index.ts` under the `zh`/`en` keys. Either way both Chinese and
+English MUST ship together; hard-coding user-visible copy inside components is forbidden.
 **Check**: any hard-coded copy, or new text shipped in only one language, fails the gate.
 
 ### VII. High Cohesion, Low Coupling
@@ -117,12 +120,12 @@ fails the gate.
 | Build | Vite (rolldown-vite), Node ≥ 24.10 |
 | State | Pinia 3 + pinia-plugin-persistedstate |
 | Routing | Vue Router 5 (lazy-loaded) |
-| UI library | Element Plus (on-demand via unplugin-element-plus) |
+| UI library | naive-ui (explicit imports; locale bound to vue-i18n). Element Plus is frozen legacy (App.vue shell + userManage/userInfo) — new code MUST NOT introduce it |
 | Styling | TailwindCSS 4 + SCSS global variables |
 | Visualization | ECharts 6 (vue-echarts), Konva, Three, AntV G6 |
 | Real-time | MQTT.js (wrapped in `src/mqtt/`) |
-| i18n | vue-i18n 11 (locale packs in `src/locales/`) |
-| HTTP | axios (unified instance + interceptors) |
+| i18n | vue-i18n 11 (SFC `<i18n>` blocks preferred; shared copy in `src/locales/index.ts` zh/en keys) |
+| HTTP | axios (shared wrappers in hooks/ — useAxios / useAxiosMonAlert / useAxiosDataHub / useAuth) |
 | Testing | Vitest 4 (unit) + Playwright (e2e) |
 | Lint | eslint + oxlint + prettier |
 
@@ -130,8 +133,8 @@ Adding or replacing a stack component is a constitutional amendment and goes thr
 
 ## Engineering Conventions
 
-- Commit messages MUST follow Conventional Commits: `<type>(<scope>): <short description>`, with
-  types limited to feat / fix / docs / style / refactor / test / chore.
+- Commit messages MUST follow Conventional Commits: `<type>: <short description>` (scope optional:
+  `<type>(<scope>): …`), with types limited to feat / fix / docs / style / refactor / test / chore.
 - `npm run lint` and `npm run type-check` MUST pass before committing.
 - Dependencies are installed with `npm i --legacy-peer-deps` (repository convention).
 - Deployment is Docker-based (registry.deepsight.ai private registry); environments switch via Vite
