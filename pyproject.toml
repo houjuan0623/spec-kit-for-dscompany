@@ -51,6 +51,7 @@ packages = ["src/specify_cli"]
 "presets/lean" = "specify_cli/core_pack/presets/lean"
 "presets/constitution-sync" = "specify_cli/core_pack/presets/constitution-sync"
 "presets/monalert-backend" = "specify_cli/core_pack/presets/monalert-backend"
+"presets/vue-frontend" = "specify_cli/core_pack/presets/vue-frontend"
 # Community bundle catalog snapshot (used for offline discovery)
 "bundles/catalog.community.json" = "specify_cli/core_pack/bundles/catalog.community.json"
 

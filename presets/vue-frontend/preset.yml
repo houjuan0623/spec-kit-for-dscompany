@@ -1,0 +1,40 @@
+schema_version: "1.0"
+
+preset:
+  id: "vue-frontend"
+  name: "Vue Frontend (Vue3 + TS + Pinia)"
+  version: "1.0.0"
+  description: "AI-Filter frontend stack standards: Vue3 + TypeScript + Pinia + Element Plus + Tailwind + ECharts/Konva/Three + MQTT. Ships an approved constitution, a prefilled plan template, and stack-level checklist items."
+  author: "AI-Filter Team"
+  repository: "https://github.com/your-org/spec-kit"
+  license: "MIT"
+
+requires:
+  speckit_version: ">=1.0.0"
+
+provides:
+  templates:
+    - type: "template"
+      name: "constitution-template"
+      file: "templates/constitution-template.md"
+      description: "Approved frontend constitution (mandatory i18n, e2e acceptance, render hot paths, tiered OOD)"
+      replaces: "constitution-template"
+
+    - type: "template"
+      name: "plan-template"
+      file: "templates/plan-template.md"
+      description: "Plan template prefilled with the locked tech stack and the real repository tree, plus render hot-path assessment and E2E acceptance mapping sections"
+      replaces: "plan-template"
+
+    - type: "template"
+      name: "checklist-template"
+      file: "templates/checklist-addendum.md"
+      description: "Stack-level mandatory checklist items for the frontend (appended to the checklist template)"
+      strategy: "append"
+
+tags:
+  - "vue"
+  - "typescript"
+  - "frontend"
+  - "pinia"
+  - "aifilter"

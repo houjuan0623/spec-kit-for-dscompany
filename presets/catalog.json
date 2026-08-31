@@ -72,6 +72,30 @@
         "backend",
         "aifilter"
       ]
+    },
+    "vue-frontend": {
+      "name": "Vue Frontend (Vue3 + TS + Pinia)",
+      "id": "vue-frontend",
+      "version": "1.0.0",
+      "description": "AI-Filter frontend stack standards: Vue3 + TypeScript + Pinia + Element Plus + Tailwind + ECharts/Konva/Three + MQTT. Ships an approved constitution, a prefilled plan template, and stack-level checklist items.",
+      "author": "AI-Filter Team",
+      "repository": "https://github.com/your-org/spec-kit",
+      "license": "MIT",
+      "bundled": true,
+      "requires": {
+        "speckit_version": ">=1.0.0"
+      },
+      "provides": {
+        "commands": 0,
+        "templates": 3
+      },
+      "tags": [
+        "vue",
+        "typescript",
+        "frontend",
+        "pinia",
+        "aifilter"
+      ]
     }
   }
 }
