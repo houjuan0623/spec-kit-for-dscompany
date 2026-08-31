@@ -48,6 +48,30 @@
         "templates",
         "compatibility"
       ]
+    },
+    "monalert-backend": {
+      "name": "MonAlert Backend (FastAPI + Celery)",
+      "id": "monalert-backend",
+      "version": "1.0.0",
+      "description": "Monitoring & alerting backend stack standards: FastAPI + Celery + asyncpg + InfluxDB + Redis + MQTT + MinIO. Ships an approved constitution, a prefilled plan template, and stack-level checklist items.",
+      "author": "AI-Filter Team",
+      "repository": "https://github.com/your-org/spec-kit",
+      "license": "MIT",
+      "bundled": true,
+      "requires": {
+        "speckit_version": ">=1.0.0"
+      },
+      "provides": {
+        "commands": 0,
+        "templates": 3
+      },
+      "tags": [
+        "fastapi",
+        "celery",
+        "monitoring",
+        "backend",
+        "aifilter"
+      ]
     }
   }
 }

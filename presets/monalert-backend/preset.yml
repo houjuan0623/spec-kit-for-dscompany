@@ -1,0 +1,40 @@
+schema_version: "1.0"
+
+preset:
+  id: "monalert-backend"
+  name: "MonAlert Backend (FastAPI + Celery)"
+  version: "1.0.0"
+  description: "Monitoring & alerting backend stack standards: FastAPI + Celery + asyncpg + InfluxDB + Redis + MQTT + MinIO. Ships an approved constitution, a prefilled plan template, and stack-level checklist items."
+  author: "AI-Filter Team"
+  repository: "https://github.com/your-org/spec-kit"
+  license: "MIT"
+
+requires:
+  speckit_version: ">=1.0.0"
+
+provides:
+  templates:
+    - type: "template"
+      name: "constitution-template"
+      file: "templates/constitution-template.md"
+      description: "Approved constitution for the monitoring & alerting backend (hot-path list, distributed exception analysis, tiered OOD)"
+      replaces: "constitution-template"
+
+    - type: "template"
+      name: "plan-template"
+      file: "templates/plan-template.md"
+      description: "Plan template prefilled with the locked tech stack and the real repository tree, plus hot-path assessment and distributed exception analysis sections"
+      replaces: "plan-template"
+
+    - type: "template"
+      name: "checklist-template"
+      file: "templates/checklist-addendum.md"
+      description: "Stack-level mandatory checklist items for the monitoring & alerting backend (appended to the checklist template)"
+      strategy: "append"
+
+tags:
+  - "fastapi"
+  - "celery"
+  - "monitoring"
+  - "backend"
+  - "aifilter"
