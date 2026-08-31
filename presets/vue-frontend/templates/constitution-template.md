@@ -81,14 +81,14 @@ forbidden. These limits bind new files strictly. For pre-existing files already 
 (brownfield inventory as of 2026-08-31: 44 SFCs > 400 lines, 6 TS modules > 300 lines), a change
 MUST NOT increase the file's net line count; splitting is scheduled as separate refactor tasks and
 does not block the gate.
-**Check**: a new file exceeding the limit, or a touched pre-existing oversized file that grew,
-fails the gate.
+**Check**: a new file or function exceeding the limit, or a touched pre-existing oversized file
+that grew, fails the gate.
 (Numbers are the team's recommended starting point; changes go through Governance.)
 
 ### IX. Styling Discipline
 
-Styling MUST prefer TailwindCSS utility classes; component-own styles MUST be `scoped`; global
-variables are defined only in `main.scss`.
+Styling MUST prefer TailwindCSS utility classes; component-own styles MUST be `scoped` (the
+`App.vue` global shell is exempt); global variables are defined only in `main.scss`.
 **Check**: unscoped component styles, or large hand-written reusable styles bypassing Tailwind, fail
 the gate.
 
@@ -157,4 +157,4 @@ Adding or replacing a stack component is a constitutional amendment and goes thr
 - Adjusting numeric articles (size limits, coverage) is a MINOR amendment; adding/removing principles
   is MAJOR.
 
-**Version**: 1.1.0 | **Ratified**: 2026-08-27 | **Last Amended**: 2026-08-31
+**Version**: 1.1.1 | **Ratified**: 2026-08-27 | **Last Amended**: 2026-08-31

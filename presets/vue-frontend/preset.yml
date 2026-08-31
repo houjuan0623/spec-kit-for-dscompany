@@ -3,7 +3,7 @@ schema_version: "1.0"
 preset:
   id: "vue-frontend"
   name: "Vue Frontend (Vue3 + TS + Pinia)"
-  version: "1.1.0"
+  version: "1.1.1"
   description: "AI-Filter frontend stack standards: Vue3 + TypeScript + Pinia + Naive UI + Tailwind + ECharts/Konva/Three + MQTT. Ships an approved constitution, a prefilled plan template, and stack-level checklist items."
   author: "AI-Filter Team"
   repository: "https://github.com/your-org/spec-kit"
