@@ -6,7 +6,7 @@ Stack-standards preset for the AI-Filter frontend: Vue3 + TypeScript + Pinia + E
 
 | File | Strategy | Content |
 |---|---|---|
-| `templates/constitution-template.md` | replace | Approved constitution: typing / Composition API / state & data flow / async & errors / mandatory i18n / coupling / size limits / styling / render hot paths / e2e acceptance / YAGNI, plus the locked stack and engineering conventions |
+| `templates/constitution-template.md` | replace | Approved constitution: typing / Composition API / state & data flow / async & errors / design-before-code tiered OOD / mandatory i18n / coupling / size limits / styling / render hot paths / e2e acceptance / YAGNI, plus the locked stack and engineering conventions |
 | `templates/plan-template.md` | replace | Prefilled Technical Context and the real repository tree; adds render hot-path assessment, OOD tiering, and E2E acceptance mapping sections; preserves the Constitution Check and Complexity Tracking skeleton |
 | `templates/checklist-addendum.md` | append | Stack-level mandatory items: reuse/typing/i18n/state/testing/commits |
 

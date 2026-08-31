@@ -38,7 +38,7 @@
 
 ### Render Hot-Path Assessment (required)
 
-Assess each category against Constitution Principle IX:
+Assess each category against Constitution Principle X:
 
 | Hot-path category | Hit? | Rationale |
 |---|---|---|
@@ -100,13 +100,13 @@ src/
 e2e/                   # Playwright e2e tests
 ```
 
-**Structure Decision**: [List the directories this feature actually touches and full paths of new files; reusable-logic placement must satisfy Constitution Principle VI: stateful → hooks/, stateless → tools/, no page-to-page imports]
+**Structure Decision**: [List the directories this feature actually touches and full paths of new files; reusable-logic placement must satisfy Constitution Principle VII: stateful → hooks/, stateless → tools/, no page-to-page imports]
 
 ## Design Deliverables (Phase 1)
 
 ### OOD Tier Assessment (required)
 
-**Tier**: [simple / complex]
+**Tier**: [simple / complex] (criteria in Constitution Principle V)
 
 - Simple tier (single-page CRUD, no cross-module collaboration): data-model.md only (for the
   frontend this means data shapes and store state shape).
@@ -117,7 +117,7 @@ e2e/                   # Playwright e2e tests
 
 ### E2E Acceptance Mapping (required for UI features)
 
-Map the spec's acceptance scenarios to Playwright cases (Constitution Principle X):
+Map the spec's acceptance scenarios to Playwright cases (Constitution Principle XI):
 
 | Spec acceptance scenario | e2e case (e2e/*.spec.ts) | Key selectors (getByRole/data-testid) |
 |---|---|---|

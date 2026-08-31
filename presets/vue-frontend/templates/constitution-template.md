@@ -38,14 +38,27 @@ Plus `ElMessage`; HTTP status semantics are fixed: 401 → redirect to login, 40
 notice, 500 → server-error notice.
 **Check**: an async chain without error handling, or a home-grown notification channel, fails the gate.
 
-### V. Mandatory Internationalization (NON-NEGOTIABLE)
+### V. Design Before Code, Tiered OOD
+
+Implementation MUST NOT precede design artifacts; tasks MUST be traceable to design elements.
+Tiered OOD applies:
+- **Simple tier** (single-page CRUD, no cross-module collaboration): data-model.md is sufficient
+  (for the frontend this means data shapes and store state shape).
+- **Complex tier** (cross-page collaboration / new visualization scene / MQTT real-time link /
+  complex form flow): Phase 1 MUST additionally produce a component/composable responsibility
+  table (name, single responsibility, collaborators — props/emits/store) and a key-interaction
+  sequence diagram of the key flow (page → hooks/stores → axios/mqtt data flow).
+**Check**: a complex-tier feature missing the responsibility table or sequence diagram fails the
+gate; forcing full OOD onto a simple-tier feature counts as over-engineering and equally fails.
+
+### VI. Mandatory Internationalization (NON-NEGOTIABLE)
 
 This is an international product. Every user-visible text (UI, errors, notices) MUST go through
 `vue-i18n`, and the Chinese and English locale packs (`locales/`) MUST be updated together;
 hard-coding user-visible copy inside components is forbidden.
 **Check**: any hard-coded copy, or new text shipped in only one language, fails the gate.
 
-### VI. High Cohesion, Low Coupling
+### VII. High Cohesion, Low Coupling
 
 Reusable logic has fixed homes: stateful composables → `hooks/`; stateless pure functions → `tools/`;
 business logic MUST NOT enter `tools/`. Pages (`pages/`, `view/`) MUST NOT import each other;
@@ -53,7 +66,7 @@ cross-page sharing goes only through hooks / stores / tools / shared components.
 circular imports.
 **Check**: page-to-page imports, business logic in tools, or circular imports fail the gate.
 
-### VII. File Size Limits
+### VIII. File Size Limits
 
 Vue SFC ≤ 400 lines; TS modules ≤ 300 lines; functions ≤ 50 lines. Anything over the limit MUST be
 split by responsibility (extract child components / composables / stores); mechanical slicing is
@@ -61,14 +74,14 @@ forbidden.
 **Check**: a file/function exceeding the limit after the change without a split task fails the gate.
 (Numbers are the team's recommended starting point; changes go through Governance.)
 
-### VIII. Styling Discipline
+### IX. Styling Discipline
 
 Styling MUST prefer TailwindCSS utility classes; component-own styles MUST be `scoped`; global
 variables are defined only in `main.scss`.
 **Check**: unscoped component styles, or large hand-written reusable styles bypassing Tailwind, fail
 the gate.
 
-### IX. Render Hot Paths (conditional)
+### X. Render Hot Paths (conditional)
 
 A feature hitting any item on this list MUST provide a performance budget and strategy in the plan
 (virtual scrolling / chunked rendering / frame sampling / lazy loading, etc.): large lists or tables,
@@ -79,7 +92,7 @@ dedicated performance work.
 **Check**: hitting the list without a budget, or fabricating metrics without hitting it, both fail
 the gate.
 
-### X. Testing & Acceptance
+### XI. Testing & Acceptance
 
 Core business logic MUST reach ≥ 80% Vitest unit-test coverage, with test files in a `__tests__/`
 folder next to the source; every UI feature's acceptance MUST include a Playwright e2e smoke case
@@ -87,7 +100,7 @@ folder next to the source; every UI feature's acceptance MUST include a Playwrig
 forbidden.
 **Check**: a UI feature without an e2e case, or selector violations, fails the gate.
 
-### XI. Minimal Implementation & Dependency Discipline
+### XII. Minimal Implementation & Dependency Discipline
 
 MUST NOT introduce abstraction layers or configuration options for hypothetical needs (YAGNI); a new
 npm dependency MUST be justified in research.md using the Decision / Rationale /
