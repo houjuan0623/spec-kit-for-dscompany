@@ -10,8 +10,10 @@
 ### I. Mandatory Typing & Naming
 
 Every function parameter, return value, and variable MUST carry a TypeScript type; interfaces / type
-aliases / enums use PascalCase; component file names match the component name in PascalCase
-(`UserProfile.vue` → `<UserProfile />`).
+aliases / enums use PascalCase; component file naming is two-track: routed page components live at
+`<dir>/index.vue` where the directory name carries the semantic name (camelCase dominant, e.g.
+`view/metricConfiguration/`), and shared/child components use PascalCase file names matching the
+component name (`ToolBar.vue` → `<ToolBar />`).
 **Check**: any untyped signature or naming violation fails the gate.
 
 ### II. Composition API & Component Contract
@@ -23,8 +25,10 @@ template → script setup → style scoped.
 
 ### III. State & Data-Flow Discipline
 
-Cross-component shared state MUST live in Pinia setup stores (`stores/`), persisted via
-`pinia-plugin-persistedstate` when needed; component-local state MUST NOT enter a global store.
+App-wide shared state MUST live in Pinia setup stores under `stores/`, persisted via
+`pinia-plugin-persistedstate` when needed; page-scoped shared state MAY live in a colocated
+`store/` subfolder inside the page's directory (still a Pinia setup store, e.g.
+`view/thermodynamicChart/store/`); component-local state MUST NOT enter any store.
 HTTP requests MUST go through the shared axios wrappers in `hooks/` (`useAxios`,
 `useAxiosMonAlert`, `useAxiosDataHub`, `useAuth` — one instance per backend service, each with
 request/response interceptors) — creating bare axios instances inside components is forbidden;
@@ -73,8 +77,12 @@ circular imports.
 
 Vue SFC ≤ 400 lines; TS modules ≤ 300 lines; functions ≤ 50 lines. Anything over the limit MUST be
 split by responsibility (extract child components / composables / stores); mechanical slicing is
-forbidden.
-**Check**: a file/function exceeding the limit after the change without a split task fails the gate.
+forbidden. These limits bind new files strictly. For pre-existing files already over the limit
+(brownfield inventory as of 2026-08-31: 44 SFCs > 400 lines, 6 TS modules > 300 lines), a change
+MUST NOT increase the file's net line count; splitting is scheduled as separate refactor tasks and
+does not block the gate.
+**Check**: a new file exceeding the limit, or a touched pre-existing oversized file that grew,
+fails the gate.
 (Numbers are the team's recommended starting point; changes go through Governance.)
 
 ### IX. Styling Discipline
@@ -149,4 +157,4 @@ Adding or replacing a stack component is a constitutional amendment and goes thr
 - Adjusting numeric articles (size limits, coverage) is a MINOR amendment; adding/removing principles
   is MAJOR.
 
-**Version**: 1.0.0 | **Ratified**: 2026-08-27 | **Last Amended**: 2026-08-31
+**Version**: 1.1.0 | **Ratified**: 2026-08-27 | **Last Amended**: 2026-08-31

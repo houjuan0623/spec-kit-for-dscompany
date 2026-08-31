@@ -15,8 +15,8 @@
 
 - [ ] New components use `<script setup lang="ts">` with typed props/emits
 - [ ] New UI built with naive-ui; no new Element Plus imports (frozen legacy)
-- [ ] Component file names are PascalCase and match the component name
-- [ ] SFCs over 400 lines / TS modules over 300 lines have split tasks listed
+- [ ] Routed pages named `<dir>/index.vue`; shared/child components PascalCase matching the component name
+- [ ] New SFCs ≤ 400 / TS modules ≤ 300; touched pre-existing oversized files did not grow (splitting tracked as separate refactor tasks)
 
 ### Internationalization & Copy
 
@@ -25,7 +25,7 @@
 
 ### State & Data Flow
 
-- [ ] Cross-component shared state lives in Pinia stores; component-local state stays out of global stores
+- [ ] App-wide state in `stores/`, page-scoped state may use the page's colocated `store/`; component-local state stays out of stores
 - [ ] HTTP requests use the shared hooks/ axios wrappers (useAxios*); real-time data uses the `mqtt/` wrapper
 - [ ] Async chains have try/catch with naive-ui `useMessage` feedback; 401/403/500 branches follow the convention
 
